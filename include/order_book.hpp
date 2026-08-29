@@ -8,6 +8,8 @@
 #include "arena_pool.hpp"
 
 constexpr size_t MAX_ORDERS = 100'000;
+// TODO(Architecture): 10,000 levels is small for wide-spread assets. 
+// If asset prices fluctuate beyond this, modulo indexing will collide.
 constexpr size_t MAX_PRICE_LEVELS = 10'000;
 
 enum class Side : uint8_t {
@@ -36,6 +38,9 @@ class FlatOrderBook {
     ArenaPool<Order, MAX_ORDERS> order_pool_;
     alignas(CACHE_LINE_SIZE) std::array<LimitLevel, MAX_PRICE_LEVELS> bid_levels_;
     alignas(CACHE_LINE_SIZE) std::array<LimitLevel, MAX_PRICE_LEVELS> ask_levels_;
+    // TODO(Feature): Add Best Bid / Best Ask state tracking.
+    // HFT Standard: Use a `std::bitset<MAX_PRICE_LEVELS> active_bids_` and 
+    // `__builtin_clz` / `__builtin_ctz` to instantly find the next populated price level when a level is cleared.
 public:
     FlatOrderBook() {
         bid_levels_.fill(LimitLevel{});

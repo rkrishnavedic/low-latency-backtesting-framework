@@ -35,6 +35,15 @@ include_directories(include)
 # Executable
 add_executable(low_latency_backtesting src/main.cpp)
 
+# Add Benchmark Target
+add_executable(bench_order_book benchmarks/bench_order_book.cpp)
+target_include_directories(bench_order_book PRIVATE include)
+
+# Apply release optimization flags for benchmarking (-O3 and native SIMD instructions)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(bench_order_book PRIVATE -O3 -march=native -ffast-math)
+endif()
+
 # Unit Test Target
 enable_testing()
 add_executable(unit_tests 
