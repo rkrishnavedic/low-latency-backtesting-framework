@@ -37,7 +37,10 @@ add_executable(low_latency_backtesting src/main.cpp)
 
 # Unit Test Target
 enable_testing()
-add_executable(unit_tests tests/test_main.cpp)
+add_executable(unit_tests 
+    tests/test_main.cpp
+    tests/test_arena_pool.cpp
+)
 target_link_libraries(unit_tests PRIVATE gtest_main)
 
 include(GoogleTest)
