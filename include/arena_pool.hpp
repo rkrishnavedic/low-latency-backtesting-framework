@@ -35,7 +35,7 @@ public:
         free_head_ = free_list_[idx];
 
         // Placement new to construct object in pre-allocated memory
-        new (&storage_[idx]) T{std::forward<Args>(args)...};
+        new (&storage_[idx]) T(std::forward<Args>(args)...);
         return idx;
     }
 

@@ -50,6 +50,7 @@ add_executable(unit_tests
     tests/test_main.cpp
     tests/test_arena_pool.cpp
     tests/test_order_book.cpp
+    tests/test_spsc_queue.cpp
 )
 target_link_libraries(unit_tests PRIVATE gtest_main)
 
