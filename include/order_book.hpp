@@ -129,4 +129,12 @@ public:
     [[nodiscard]] const Order& get_order(uint32_t order_idx) const {
         return order_pool_[order_idx];
     }
+
+    [[nodiscard]] const LimitLevel* get_bids_raw_ptr() const noexcept {
+        return bid_levels_.data();
+    }
+
+    [[nodiscard]] const LimitLevel* get_asks_raw_ptr() const noexcept {
+        return ask_levels_.data();
+    }
 };
