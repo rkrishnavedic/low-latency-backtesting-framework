@@ -35,7 +35,7 @@ TEST(PipelineTest, EndToEndGatewayToMatchingEngine) {
             // Stream 50,000 ADD order events
             for (uint64_t i = 0; i < TOTAL_EVENTS; ++i) {
                 MarketEvent event{
-                    .timestamp = profiling::rdtsc_start(),
+                    .timestamp_ns = profiling::rdtsc_start(),
                     .order_id = 100000 + i,
                     .price = static_cast<uint32_t>(5000 + (i % 100)),
                     .qty = 10,
@@ -74,7 +74,7 @@ TEST(PipelineTest, EndToEndGatewayToMatchingEngine) {
                     EXPECT_NE(handle, INVALID_INDEX);
                 }
 
-                latencies_cycles.push_back(arrival_time - event.timestamp);
+                latencies_cycles.push_back(arrival_time - event.timestamp_ns);
                 processed_count++;
             } else {
                 _mm_pause(); // Low-latency spin hint

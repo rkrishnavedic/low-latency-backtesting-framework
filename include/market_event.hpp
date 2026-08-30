@@ -10,7 +10,7 @@ enum class MarketEventType : uint8_t {
 };
 
 struct alignas(CACHE_LINE_SIZE) MarketEvent {
-    uint64_t timestamp{0};
+    uint64_t timestamp_ns{0};
     uint64_t order_id{0};
     uint32_t price{0};
     uint32_t qty{0};
