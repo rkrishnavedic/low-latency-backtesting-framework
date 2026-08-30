@@ -55,6 +55,7 @@ add_executable(unit_tests
     tests/test_pipeline.cpp
     tests/test_event_engine.cpp
     tests/test_queue_simulator.cpp
+    tests/test_latency_model.cpp
 )
 target_link_libraries(unit_tests PRIVATE gtest_main)
 
